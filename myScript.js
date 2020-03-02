@@ -1,12 +1,11 @@
+window.addEventListener('DOMContentLoaded', () => {
+	'use strict';
 /***********************************************************************************
  ************************************TABS*******************************************
  ***********************************************************************************/
-window.addEventListener('DOMContentLoaded', () => {
-	'use strict';
-
 	let header = document.querySelector('.info-header'),
-		tab = document.querySelectorAll('.info-header-tab'),
-		infoTabContent = document.querySelectorAll('.info-tabcontent');
+		  tab = document.querySelectorAll('.info-header-tab'),
+		  infoTabContent = document.querySelectorAll('.info-tabcontent');
 
 	function hideContent(a) {
 		for (let i = a; i < infoTabContent.length; i++) {
@@ -44,9 +43,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	function getTimeRemaining(endTime) {
 		let t = Date.parse(endTime) - Date.parse(new Date()),
-			seconds = Math.floor((t / 1000) % 60),
-			minutes = Math.floor((t / 1000 / 60) % 60),
-			hours = Math.floor((t / (1000 * 60 * 60)));
+			  seconds = Math.floor((t / 1000) % 60),
+			  minutes = Math.floor((t / 1000 / 60) % 60),
+			  hours = Math.floor((t / (1000 * 60 * 60)));
 
 		return {
 			'total': t,
@@ -58,10 +57,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	function setClock(id, endTime) {
 		let timer = document.getElementById(id),
-			hours = timer.querySelector('.hours'),
-			minutes = timer.querySelector('.minutes'),
-			seconds = timer.querySelector('.seconds'),
-			timeInterval = setInterval(updateClock, 1000);
+			  hours = timer.querySelector('.hours'),
+			  minutes = timer.querySelector('.minutes'),
+			  seconds = timer.querySelector('.seconds'),
+			  timeInterval = setInterval(updateClock, 1000);
 
 		function updateClock() {
 			let t = getTimeRemaining(endTime);
@@ -93,28 +92,28 @@ window.addEventListener('DOMContentLoaded', () => {
 ***********************************************************************************/
 
 	let more = document.querySelector('.more'),
-  overLay = document.querySelector('.overlay'),
-  close = document.querySelector('.popup-close'),
-  dscrptBtn = document.querySelectorAll('.description-btn');
+      overLay = document.querySelector('.overlay'),
+      close = document.querySelector('.popup-close'),
+      dscrptBtn = document.querySelectorAll('.description-btn');
 
-more.addEventListener('click', function () {
-  overLay.style.display = 'block';
-  this.classList.add('more-splash');
-  document.body.style.overflow = 'hidden';
-});
-
-close.addEventListener('click', function () {
-  overLay.style.display = 'none';
-  more.classList.remove('more-splash');
-  document.body.style.overflow = '';
-});
-
-dscrptBtn.forEach(function(item) {
-  item.addEventListener('click', function() {
+  more.addEventListener('click', () => {
     overLay.style.display = 'block';
-    item.classList.add('more-splash');
+    more.classList.add('more-splash');
     document.body.style.overflow = 'hidden';
   });
-});
+
+  close.addEventListener('click', () => {
+    overLay.style.display = 'none';
+    more.classList.remove('more-splash');
+    document.body.style.overflow = '';
+  });
+
+  dscrptBtn.forEach(function(item) {
+    item.addEventListener('click', () => {
+      overLay.style.display = 'block';
+      item.classList.add('more-splash');
+      document.body.style.overflow = 'hidden';
+    });
+  });
   
 });
