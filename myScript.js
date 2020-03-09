@@ -121,56 +121,107 @@ window.addEventListener('DOMContentLoaded', () => {
 	};
 
 	let form = document.querySelector('.main-form'),
-			contactForm = document.querySelector('#form'),
-			input = document.getElementsByTagName('input'),
-			statusMessage = document.createElement('div');
-			statusMessage.classList.add('status');
+		contactForm = document.querySelector('#form'),
+		input = document.getElementsByTagName('input'),
+		statusMessage = document.createElement('div');
+	statusMessage.classList.add('status');
 
 	function sendRequest(data) {
-		data.addEventListener('submit', function(e) {
-				e.preventDefault();
-				data.appendChild(statusMessage);
-				let formData = new FormData(data);
+		data.addEventListener('submit', function (e) {
+			e.preventDefault();
+			data.appendChild(statusMessage);
+			let formData = new FormData(data);
 
-				function postData() {
-					return new Promise(function(resolve, reject) {
-						let request = new XMLHttpRequest();
+			function postData() {
+				return new Promise(function (resolve, reject) {
+					let request = new XMLHttpRequest();
 
-						request.open('POST', 'server.php');
-						request.setRequestHeader('Content-type', 'application/json');
-						request.onreadystatechange = function() {
-							if(request.readyState < 4) {
+					request.open('POST', 'server.php');
+					request.setRequestHeader('Content-type', 'application/json');
+					request.onreadystatechange = function () {
+						if (request.readyState < 4) {
+							resolve();
+						} else if (request.readyState === 4) {
+							if (request.readyState == 200 && request.readyState < 300) {
 								resolve();
-							} else if (request.readyState === 4) {
-									if (request.readyState == 200 && request.readyState < 300) {
-										resolve();
-									} else {
-										reject();
-									}
+							} else {
+								reject();
 							}
-						};
-						let obj = {};
-						formData.forEach(function(value,key) {
-							obj[key] = value;
-						});
-						let json = JSON.stringify(obj);
-						request.send(json);
+						}
+					};
+					let obj = {};
+					formData.forEach(function (value, key) {
+						obj[key] = value;
 					});
-				}
+					let json = JSON.stringify(obj);
+					request.send(json);
+				});
+			}
 
-				function clearInput() {
-					for(let i = 0; i < input.length; i++) {
-						input[i].value = '';
-					}
+			function clearInput() {
+				for (let i = 0; i < input.length; i++) {
+					input[i].value = '';
 				}
+			}
 
-				postData(formData)
-						.then(() => statusMessage.innerHTML = message.loading)
-						.then(() => statusMessage.innerHTML = message.success)
-						.catch(() => statusMessage.innerHTML = message.failure)
-						.then(clearInput);
+			postData(formData)
+				.then(() => statusMessage.innerHTML = message.loading)
+				.then(() => statusMessage.innerHTML = message.success)
+				.catch(() => statusMessage.innerHTML = message.failure)
+				.then(clearInput);
 		});
 	}
 	sendRequest(form);
 	sendRequest(contactForm);
+
+	// SLIDER
+
+	let sliderIndex = 1,
+		slides = document.querySelectorAll('.slider-item'),
+		prev = document.querySelector('.prev'),
+		next = document.querySelector('.next'),
+		slidesWrap = document.querySelector('.slider-dots'),
+		dots = document.querySelectorAll('.dot');
+
+	showSlider(sliderIndex);
+
+	function showSlider(n) {
+		if (n > slides.length) {
+			sliderIndex = 1;
+		}
+
+		if (n < 1) {
+			sliderIndex = slides.length;
+		}
+
+		slides.forEach(item => item.style.display = 'none');
+		dots.forEach(item => item.classList.remove('dot-active'));
+
+		slides[sliderIndex - 1].style.display = 'block';
+		dots[sliderIndex - 1].classList.add('dot-active');
+	}
+
+	function plusSlides(n) {
+		showSlider(sliderIndex += n);
+	}
+
+	function currentSlides(n) {
+		showSlider(sliderIndex = n);
+	}
+
+	prev.addEventListener('click', function () {
+		plusSlides(-1);
+	});
+
+	next.addEventListener('click', function () {
+		plusSlides(1);
+	});
+
+	slidesWrap.addEventListener('click', function (event) {
+		for (let i = 0; i < dots.length + 1; i++) {
+			if (event.target.classList.contains('dot') && event.target == dots[i - 1]) {
+				currentSlides(i);
+			}
+		}
+	});
 });
