@@ -1,29 +1,28 @@
-//TABS
-
 window.addEventListener('DOMContentLoaded', () => {
 	'use strict';
-
-	let header = document.querySelector('.info-header'),
+	//Tabs
+	const header = document.querySelector('.info-header'),
 		tab = document.querySelectorAll('.info-header-tab'),
 		infoTabContent = document.querySelectorAll('.info-tabcontent');
 
-	function hideContent(a) {
+	const hideContent = (a = 1) => {
 		for (let i = a; i < infoTabContent.length; i++) {
 			infoTabContent[i].classList.remove('show');
 			infoTabContent[i].classList.add('hide');
 		}
-	}
-	hideContent(1);
+	};
+	hideContent();
 
-	function showContent(b) {
+	const showContent = (b) => {
 		if (infoTabContent[b].classList.contains('hide')) {
 			infoTabContent[b].classList.remove('hide');
 			infoTabContent[b].classList.add('show');
 		}
-	}
+	};
 
 	header.addEventListener('click', (event) => {
 		let target = event.target;
+
 		if (target && target.classList.contains('info-header-tab')) {
 			for (let i = 0; i < tab.length; i++) {
 				if (target == tab[i]) {
@@ -36,7 +35,6 @@ window.addEventListener('DOMContentLoaded', () => {
 	});
 
 	// TIMER
-
 	let deadLine = "02-27-2022";
 
 	function getTimeRemaining(endTime) {
@@ -181,92 +179,92 @@ window.addEventListener('DOMContentLoaded', () => {
 		prev = document.querySelector('.prev'),
 		next = document.querySelector('.next'),
 		slidesWrap = document.querySelector('.slider-dots'),
-		dots = document.querySelectorAll('.dot'); 
+		dots = document.querySelectorAll('.dot');
 
-		showSlider(sliderIndex);
-		
-		function showSlider(n) {
-			if(n > slides.length) {
-				sliderIndex = 1;
-			}
+	showSlider(sliderIndex);
 
-			if(n < 1) {
-				sliderIndex = slides.length;
-			}
-
-			slides.forEach(item => item.style.display = 'none');
-			dots.forEach(item => item.classList.remove('dot-active'));
-
-			slides[sliderIndex - 1].style.display = 'block';
-			dots[sliderIndex - 1].classList.add('dot-active');
+	function showSlider(n) {
+		if (n > slides.length) {
+			sliderIndex = 1;
 		}
 
-		function plusSlides(n) {
-			showSlider(sliderIndex += n);
+		if (n < 1) {
+			sliderIndex = slides.length;
 		}
 
-		function currentSlides(n) {
-			showSlider(sliderIndex = n);
-		}
+		slides.forEach(item => item.style.display = 'none');
+		dots.forEach(item => item.classList.remove('dot-active'));
 
-		prev.addEventListener('click', function(){
-			plusSlides(-1);
-		});
-		
-		next.addEventListener('click', function() {
-			plusSlides(1);
-		});
+		slides[sliderIndex - 1].style.display = 'block';
+		dots[sliderIndex - 1].classList.add('dot-active');
+	}
 
-		slidesWrap.addEventListener('click', function(event) {
-			for(let i = 0; i < dots.length + 1; i++) {
-				if (event.target.classList.contains('dot') && event.target == dots[i - 1]) {
-					currentSlides(i);
-				}
+	function plusSlides(n) {
+		showSlider(sliderIndex += n);
+	}
+
+	function currentSlides(n) {
+		showSlider(sliderIndex = n);
+	}
+
+	prev.addEventListener('click', function () {
+		plusSlides(-1);
+	});
+
+	next.addEventListener('click', function () {
+		plusSlides(1);
+	});
+
+	slidesWrap.addEventListener('click', function (event) {
+		for (let i = 0; i < dots.length + 1; i++) {
+			if (event.target.classList.contains('dot') && event.target == dots[i - 1]) {
+				currentSlides(i);
 			}
-		});
+		}
+	});
 
-		// CALC
+	// CALC
 
-		let persons = document.querySelectorAll('.counter-block-input')[0],
-			restDays = document.querySelectorAll('.counter-block-input') [1],
-			place = document.getElementById('select'),
-			total = document.getElementById('total'),
-			personSum = 0,
-			daySum = 0,
-			totalSum = 0;
+	let persons = document.querySelectorAll('.counter-block-input')[0],
+		restDays = document.querySelectorAll('.counter-block-input')[1],
+		place = document.getElementById('select'),
+		total = document.getElementById('total'),
+		personSum = 0,
+		daySum = 0,
+		totalSum = 0;
 
+	total.innerHTML = 0;
+
+	persons.addEventListener('change', function () {
+		personSum = +this.value;
+		totalSum = (personSum * daySum) * 4000;
+
+		if (persons.value == '' || persons.value == 0) {
 			total.innerHTML = 0;
+		} else {
+			total.innerHTML = totalSum;
+		}
+	});
 
-			persons.addEventListener('change', function() {
-				personSum = +this.value;
-				totalSum = (personSum * daySum)*4000;
+	restDays.addEventListener('change', function () {
+		daySum = +this.value;
+		totalSum = (personSum * daySum) * 4000;
 
-				if(persons.value == '' || persons.value == 0) {
-					total.innerHTML = 0;
-				} else {
-					total.innerHTML = totalSum;
-				}
-			});
+		if (restDays.value == '' || restDays.value == 0) {
+			total.innerHTML = 0;
+		} else {
+			total.innerHTML = totalSum;
+		}
+	});
 
-			restDays.addEventListener('change', function() {
-				daySum = +this.value;
-				totalSum = (personSum * daySum)*4000;
-
-				if(restDays.value == '' || restDays.value == 0) {
-					total.innerHTML = 0;
-				} else {
-					total.innerHTML = totalSum;
-				}
-			});
-
-			place.addEventListener('change', function() {
-				if(persons.value == '' || restDays.value == '') {
-					total.innerHTML = 0;
-				} else {
-					let a = totalSum;
-				 	total.innerHTML = a * this.options[this.selectedIndex].value;
-				}
-			});
+	place.addEventListener('change', function () {
+		if (persons.value == '' || restDays.value == '') {
+			total.innerHTML = 0;
+		} else {
+			let a = totalSum;
+			total.innerHTML = a * this.options[this.selectedIndex].value;
+		}
+	});
 
 
 
