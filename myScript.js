@@ -34,41 +34,41 @@ window.addEventListener('DOMContentLoaded', () => {
 		}
 	});
 
-	// TIMER
-	let deadLine = "02-27-2022";
 
-	function getTimeRemaining(endTime) {
-		let t = Date.parse(endTime) - Date.parse(new Date()),
-			seconds = Math.floor((t / 1000) % 60),
-			minutes = Math.floor((t / 1000 / 60) % 60),
-			hours = Math.floor((t / (1000 * 60 * 60)));
+	// Timer
+	const deadLine = "02-27-2022";
+
+	const getTimeRemaining = (endTime) => {
+		const total = Date.parse(endTime) - Date.parse(new Date()),
+					seconds = Math.floor((t / 1000) % 60),
+					minutes = Math.floor((t / 1000 / 60) % 60),
+					hours = Math.floor((t / (1000 * 60 * 60)));
 
 		return {
-			'total': t,
-			'hours': hours,
-			'minutes': minutes,
-			'seconds': seconds
+			total,
+			hours,
+			minutes,
+			seconds
 		};
-	}
+	};
 
-	function setClock(id, endTime) {
-		let timer = document.getElementById(id),
-			hours = timer.querySelector('.hours'),
-			minutes = timer.querySelector('.minutes'),
-			seconds = timer.querySelector('.seconds'),
-			timeInterval = setInterval(updateClock, 1000);
+	const addZero = (num) => {
+		if (num < 10) {
+			return `0${num}`;
+		} else {
+			return num;
+		}
+	};
+
+	const setClock = (selector, endTime) => {
+		const timer = document.getElementById(selector),
+				hours = timer.querySelector('.hours'),
+				minutes = timer.querySelector('.minutes'),
+				seconds = timer.querySelector('.seconds'),
+				timeInterval = setInterval(updateClock, 1000);
 
 		function updateClock() {
-			let t = getTimeRemaining(endTime);
-
-			function addZero(num) {
-				if (num <= 9) {
-					return '0' + num;
-				} else {
-					return num;
-				}
-			}
-
+			const t = getTimeRemaining(endTime);
 			hours.textContent = addZero(t.hours);
 			minutes.textContent = addZero(t.minutes);
 			seconds.textContent = addZero(t.seconds);
@@ -80,8 +80,10 @@ window.addEventListener('DOMContentLoaded', () => {
 				seconds.textContent = '00';
 			}
 		}
-	}
+	};
+
 	setClock('timer', deadLine);
+
 
 	//MODAL WINDOW 
 
