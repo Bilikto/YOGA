@@ -85,35 +85,34 @@ window.addEventListener('DOMContentLoaded', () => {
 	setClock('timer', deadLine);
 
 
-	//MODAL WINDOW 
+	//Modal window
+	const moreInfoBtn = document.querySelector('.more'),
+				modal = document.querySelector('.overlay'),
+				closeBtn = document.querySelector('.popup-close'),
+				descrBtn = document.querySelectorAll('.description-btn');
 
-	let more = document.querySelector('.more'),
-		overLay = document.querySelector('.overlay'),
-		close = document.querySelector('.popup-close'),
-		dscrptBtn = document.querySelectorAll('.description-btn');
-
-	more.addEventListener('click', () => {
-		overLay.style.display = 'block';
-		more.classList.add('more-splash');
+	moreInfoBtn.addEventListener('click', () => {
+		modal.style.display = 'block';
+		moreInfoBtn.classList.add('more-splash');
 		document.body.style.overflow = 'hidden';
 	});
 
-	close.addEventListener('click', () => {
-		overLay.style.display = 'none';
-		more.classList.remove('more-splash');
+	closeBtn.addEventListener('click', () => {
+		modal.style.display = 'none';
+		moreInfoBtn.classList.remove('more-splash');
 		document.body.style.overflow = '';
 	});
 
-	dscrptBtn.forEach(item => {
-		item.addEventListener('click', () => {
-			overLay.style.display = 'block';
-			item.classList.add('more-splash');
+	descrBtn.forEach(btn => {
+		btn.addEventListener('click', () => {
+			modal.style.display = 'block';
+			btn.classList.add('more-splash');
 			document.body.style.overflow = 'hidden';
 		});
 	});
 
-	// FORM
 
+	// FORM
 	let message = {
 		loading: 'Loading...',
 		success: 'Thank you! We will contact you soon!',
