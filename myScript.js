@@ -112,35 +112,35 @@ window.addEventListener('DOMContentLoaded', () => {
 	});
 
 
-	// FORM
-	let message = {
+	// Form
+	const message = {
 		loading: 'Loading...',
 		success: 'Thank you! We will contact you soon!',
 		failure: 'Something is wrong...'
 	};
 
-	let form = document.querySelector('.main-form'),
-		contactForm = document.querySelector('#form'),
-		input = document.getElementsByTagName('input'),
-		statusMessage = document.createElement('div');
-	statusMessage.classList.add('status');
+	const form = document.querySelector('.main-form'),
+				contactForm = document.querySelector('#form'),
+				input = document.getElementsByTagName('input'),
+				statusMessage = document.createElement('div');
+				statusMessage.classList.add('status');
 
-	function sendRequest(data) {
-		data.addEventListener('submit', function (e) {
+	const sendRequest = (form) => {
+		form.addEventListener('submit', (e) => {
 			e.preventDefault();
-			data.appendChild(statusMessage);
-			let formData = new FormData(data);
+
+			form.appendChild(statusMessage);
+			const formData = new FormData(form);
 
 			function postData() {
-				return new Promise(function (resolve, reject) {
-					let request = new XMLHttpRequest();
-
+				return new Promise((resolve, reject) => {
+					const request = new XMLHttpRequest();
 					request.open('POST', 'server.php');
-					request.setRequestHeader('Content-type', 'application/json');
-					request.onreadystatechange = function () {
+					request.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
+					request.onreadystatechange =  () => {
 						if (request.readyState < 4) {
 							resolve();
-						} else if (request.readyState === 4) {
+						} else if (request.readyState == 4) {
 							if (request.readyState == 200 && request.readyState < 300) {
 								resolve();
 							} else {
@@ -148,8 +148,9 @@ window.addEventListener('DOMContentLoaded', () => {
 							}
 						}
 					};
+
 					let obj = {};
-					formData.forEach(function (value, key) {
+					formData.forEach((value, key) => {
 						obj[key] = value;
 					});
 					let json = JSON.stringify(obj);
@@ -157,21 +158,23 @@ window.addEventListener('DOMContentLoaded', () => {
 				});
 			}
 
-			function clearInput() {
+			const clearInput = () => {
 				for (let i = 0; i < input.length; i++) {
 					input[i].value = '';
 				}
-			}
+			};
 
-			postData(formData)
+			postData()
 				.then(() => statusMessage.innerHTML = message.loading)
 				.then(() => statusMessage.innerHTML = message.success)
 				.catch(() => statusMessage.innerHTML = message.failure)
 				.then(clearInput);
 		});
-	}
+	};
+
 	sendRequest(form);
 	sendRequest(contactForm);
+
 
 	// SLIDES
 
