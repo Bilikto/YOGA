@@ -40,9 +40,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	const getTimeRemaining = (endTime) => {
 		const total = Date.parse(endTime) - Date.parse(new Date()),
-					seconds = Math.floor((t / 1000) % 60),
-					minutes = Math.floor((t / 1000 / 60) % 60),
-					hours = Math.floor((t / (1000 * 60 * 60)));
+			seconds = Math.floor((t / 1000) % 60),
+			minutes = Math.floor((t / 1000 / 60) % 60),
+			hours = Math.floor((t / (1000 * 60 * 60)));
 
 		return {
 			total,
@@ -62,10 +62,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	const setClock = (selector, endTime) => {
 		const timer = document.getElementById(selector),
-				hours = timer.querySelector('.hours'),
-				minutes = timer.querySelector('.minutes'),
-				seconds = timer.querySelector('.seconds'),
-				timeInterval = setInterval(updateClock, 1000);
+			hours = timer.querySelector('.hours'),
+			minutes = timer.querySelector('.minutes'),
+			seconds = timer.querySelector('.seconds'),
+			timeInterval = setInterval(updateClock, 1000);
 
 		function updateClock() {
 			const t = getTimeRemaining(endTime);
@@ -87,27 +87,33 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	//Modal window
 	const moreInfoBtn = document.querySelector('.more'),
-				modal = document.querySelector('.overlay'),
-				closeBtn = document.querySelector('.popup-close'),
-				descrBtn = document.querySelectorAll('.description-btn');
+		modal = document.querySelector('.overlay'),
+		closeBtn = document.querySelector('.popup-close'),
+		descrBtns = document.querySelectorAll('.description-btn');
 
-	moreInfoBtn.addEventListener('click', () => {
+	const openModal = () => {
 		modal.style.display = 'block';
 		moreInfoBtn.classList.add('more-splash');
 		document.body.style.overflow = 'hidden';
-	});
+	};
 
-	closeBtn.addEventListener('click', () => {
+	const closeModal = () => {
 		modal.style.display = 'none';
 		moreInfoBtn.classList.remove('more-splash');
 		document.body.style.overflow = '';
+	};
+
+	moreInfoBtn.addEventListener('click', () => {
+		openModal();
 	});
 
-	descrBtn.forEach(btn => {
+	closeBtn.addEventListener('click', () => {
+		closeModal();
+	});
+
+	descrBtns.forEach(btn => {
 		btn.addEventListener('click', () => {
-			modal.style.display = 'block';
-			btn.classList.add('more-splash');
-			document.body.style.overflow = 'hidden';
+			openModal();
 		});
 	});
 
@@ -120,10 +126,10 @@ window.addEventListener('DOMContentLoaded', () => {
 	};
 
 	const form = document.querySelector('.main-form'),
-				contactForm = document.querySelector('#form'),
-				input = document.getElementsByTagName('input'),
-				statusMessage = document.createElement('div');
-				statusMessage.classList.add('status');
+		contactForm = document.querySelector('#form'),
+		input = document.getElementsByTagName('input'),
+		statusMessage = document.createElement('div');
+	statusMessage.classList.add('status');
 
 	const sendRequest = (form) => {
 		form.addEventListener('submit', (e) => {
@@ -137,7 +143,7 @@ window.addEventListener('DOMContentLoaded', () => {
 					const request = new XMLHttpRequest();
 					request.open('POST', 'server.php');
 					request.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
-					request.onreadystatechange =  () => {
+					request.onreadystatechange = () => {
 						if (request.readyState < 4) {
 							resolve();
 						} else if (request.readyState == 4) {
