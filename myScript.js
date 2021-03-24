@@ -112,7 +112,13 @@ window.addEventListener('DOMContentLoaded', () => {
 	});
 
 	modal.addEventListener('click', (e) => {
-		if (e.target == modal || e.target.hasAttrubute('data-close')) {
+		if (e.target == modal || e.target.hasAttribute('data-close')) {
+			closeModal();
+		}
+	});
+
+	document.documentElement.addEventListener('keydown', (e) => {
+		if (e.code == 'Escape' && modal.style.display == 'block') {
 			closeModal();
 		}
 	});
