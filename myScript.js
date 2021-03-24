@@ -40,9 +40,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	const getTimeRemaining = (endTime) => {
 		const total = Date.parse(endTime) - Date.parse(new Date()),
-			seconds = Math.floor((t / 1000) % 60),
-			minutes = Math.floor((t / 1000 / 60) % 60),
-			hours = Math.floor((t / (1000 * 60 * 60)));
+			seconds = Math.floor((total / 1000) % 60),
+			minutes = Math.floor((total / 1000 / 60) % 60),
+			hours = Math.floor((total / (1000 * 60 * 60)));
 
 		return {
 			total,
@@ -109,6 +109,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	closeBtn.addEventListener('click', () => {
 		closeModal();
+	});
+
+	modal.addEventListener('click', (e) => {
+		if (e.target == modal || e.target.hasAttrubute('data-close')) {
+			closeModal();
+		}
 	});
 
 	descrBtns.forEach(btn => {
