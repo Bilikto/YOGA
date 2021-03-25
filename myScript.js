@@ -195,18 +195,16 @@ window.addEventListener('DOMContentLoaded', () => {
 	sendRequest(contactForm);
 
 
-	// SLIDES
+	//Slides
+	const slides = document.querySelectorAll('.slider-item'),
+				prev = document.querySelector('.prev'),
+				next = document.querySelector('.next'),
+				slidesWrap = document.querySelector('.slider-dots'),
+				dots = document.querySelectorAll('.dot');
+				
+	let sliderIndex = 1;
 
-	let sliderIndex = 1,
-		slides = document.querySelectorAll('.slider-item'),
-		prev = document.querySelector('.prev'),
-		next = document.querySelector('.next'),
-		slidesWrap = document.querySelector('.slider-dots'),
-		dots = document.querySelectorAll('.dot');
-
-	showSlider(sliderIndex);
-
-	function showSlider(n) {
+	const showSlider = (n) => {
 		if (n > slides.length) {
 			sliderIndex = 1;
 		}
@@ -220,21 +218,21 @@ window.addEventListener('DOMContentLoaded', () => {
 
 		slides[sliderIndex - 1].style.display = 'block';
 		dots[sliderIndex - 1].classList.add('dot-active');
-	}
+	};
 
-	function plusSlides(n) {
+	const plusSlides = (n) => {
 		showSlider(sliderIndex += n);
-	}
+	};
 
-	function currentSlides(n) {
+	const currentSlides = (n) => {
 		showSlider(sliderIndex = n);
-	}
+	};
 
-	prev.addEventListener('click', function () {
+	prev.addEventListener('click', () => {
 		plusSlides(-1);
 	});
 
-	next.addEventListener('click', function () {
+	next.addEventListener('click', () => {
 		plusSlides(1);
 	});
 
@@ -246,8 +244,10 @@ window.addEventListener('DOMContentLoaded', () => {
 		}
 	});
 
-	// CALC
+	showSlider(sliderIndex);
 
+
+	// CALC
 	let persons = document.querySelectorAll('.counter-block-input')[0],
 		restDays = document.querySelectorAll('.counter-block-input')[1],
 		place = document.getElementById('select'),
