@@ -134,21 +134,29 @@ window.addEventListener('DOMContentLoaded', () => {
 	const message = {
 		loading: 'Loading...',
 		success: 'Thank you! We will contact you soon!',
-		failure: 'Something is wrong...'
+		failure: 'Something goes wrong...'
 	};
 
 	const form = document.querySelector('.main-form'),
-		contactForm = document.querySelector('#form'),
-		input = document.getElementsByTagName('input'),
-		statusMessage = document.createElement('div');
-	statusMessage.classList.add('status');
+				contactForm = document.querySelector('#form'),
+				input = document.getElementsByTagName('input');
+
+	const statusMessage = document.createElement('div');
+				statusMessage.classList.add('status');
+				statusMessage.innerHTML = message.loading;
 
 	const sendRequest = (form) => {
 		form.addEventListener('submit', (e) => {
 			e.preventDefault();
 
 			form.appendChild(statusMessage);
+
 			const formData = new FormData(form);
+			const obj = {};
+			formData.forEach((value, key) => {
+				obj[key] = value;
+			});
+			const json = JSON.stringify(obj);
 
 			function postData() {
 				return new Promise((resolve, reject) => {
@@ -159,19 +167,13 @@ window.addEventListener('DOMContentLoaded', () => {
 						if (request.readyState < 4) {
 							resolve();
 						} else if (request.readyState == 4) {
-							if (request.readyState == 200 && request.readyState < 300) {
+							if (request.readyState >= 200 && request.readyState < 300) {
 								resolve();
 							} else {
 								reject();
 							}
 						}
 					};
-
-					let obj = {};
-					formData.forEach((value, key) => {
-						obj[key] = value;
-					});
-					let json = JSON.stringify(obj);
 					request.send(json);
 				});
 			}
@@ -183,10 +185,9 @@ window.addEventListener('DOMContentLoaded', () => {
 			};
 
 			postData()
-				.then(() => statusMessage.innerHTML = message.loading)
 				.then(() => statusMessage.innerHTML = message.success)
 				.catch(() => statusMessage.innerHTML = message.failure)
-				.then(clearInput);
+				.finally(clearInput);
 		});
 	};
 
