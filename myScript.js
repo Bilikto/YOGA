@@ -138,12 +138,12 @@ window.addEventListener('DOMContentLoaded', () => {
 	};
 
 	const form = document.querySelector('.main-form'),
-				contactForm = document.querySelector('#form'),
-				input = document.getElementsByTagName('input');
+		contactForm = document.querySelector('#form'),
+		input = document.getElementsByTagName('input');
 
 	const statusMessage = document.createElement('div');
-				statusMessage.classList.add('status');
-				statusMessage.innerHTML = message.loading;
+	statusMessage.classList.add('status');
+	statusMessage.innerHTML = message.loading;
 
 	const sendRequest = (form) => {
 		form.addEventListener('submit', (e) => {
@@ -197,11 +197,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	//Slides
 	const slides = document.querySelectorAll('.slider-item'),
-				prev = document.querySelector('.prev'),
-				next = document.querySelector('.next'),
-				slidesWrap = document.querySelector('.slider-dots'),
-				dots = document.querySelectorAll('.dot');
-				
+		prev = document.querySelector('.prev'),
+		next = document.querySelector('.next'),
+		slidesWrap = document.querySelector('.slider-dots'),
+		dots = document.querySelectorAll('.dot');
+
 	let sliderIndex = 1;
 
 	const showSlider = (n) => {
@@ -213,8 +213,13 @@ window.addEventListener('DOMContentLoaded', () => {
 			sliderIndex = slides.length;
 		}
 
-		slides.forEach(item => item.style.display = 'none');
-		dots.forEach(item => item.classList.remove('dot-active'));
+		slides.forEach((slide) => {
+			slide.style.display = 'none';
+		});
+
+		dots.forEach((dot) => {
+			dot.classList.remove('dot-active');
+		});
 
 		slides[sliderIndex - 1].style.display = 'block';
 		dots[sliderIndex - 1].classList.add('dot-active');
@@ -236,9 +241,11 @@ window.addEventListener('DOMContentLoaded', () => {
 		plusSlides(1);
 	});
 
-	slidesWrap.addEventListener('click', function (event) {
+	slidesWrap.addEventListener('click', (e) => {
+		const target = e.target;
+
 		for (let i = 0; i < dots.length + 1; i++) {
-			if (event.target.classList.contains('dot') && event.target == dots[i - 1]) {
+			if (target.classList.contains('dot') && target == dots[i - 1]) {
 				currentSlides(i);
 			}
 		}
