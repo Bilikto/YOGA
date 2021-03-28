@@ -254,45 +254,43 @@ window.addEventListener('DOMContentLoaded', () => {
 	showSlider(sliderIndex);
 
 
-	// CALC
-	let persons = document.querySelectorAll('.counter-block-input')[0],
+	//Calculator
+	const persons = document.querySelectorAll('.counter-block-input')[0],
 		restDays = document.querySelectorAll('.counter-block-input')[1],
 		place = document.getElementById('select'),
-		total = document.getElementById('total'),
-		personSum = 0,
+		total = document.getElementById('total');
+
+	let personSum = 0,
 		daySum = 0,
 		totalSum = 0;
 
-	total.innerHTML = 0;
-
-	persons.addEventListener('change', function () {
-		personSum = +this.value;
-		totalSum = (personSum * daySum) * 4000;
-
-		if (persons.value == '' || persons.value == 0) {
+	const changeTotal = (elem) => {
+		if (elem.value == '' || elem.value == 0) {
 			total.innerHTML = 0;
 		} else {
 			total.innerHTML = totalSum;
 		}
+	};
+
+	persons.addEventListener('change', function () {
+		personSum = +this.value;
+		totalSum = (personSum * daySum) * 100;
+
+		changeTotal(persons);
 	});
 
 	restDays.addEventListener('change', function () {
 		daySum = +this.value;
-		totalSum = (personSum * daySum) * 4000;
+		totalSum = (personSum * daySum) * 100;
 
-		if (restDays.value == '' || restDays.value == 0) {
-			total.innerHTML = 0;
-		} else {
-			total.innerHTML = totalSum;
-		}
+		changeTotal(restDays);
 	});
 
 	place.addEventListener('change', function () {
 		if (persons.value == '' || restDays.value == '') {
 			total.innerHTML = 0;
 		} else {
-			let a = totalSum;
-			total.innerHTML = a * this.options[this.selectedIndex].value;
+			total.innerHTML = totalSum * this.options[this.selectedIndex].value;
 		}
 	});
 
