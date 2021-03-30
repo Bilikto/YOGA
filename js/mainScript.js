@@ -9,7 +9,7 @@ import calculator from './modules/calculator.js';
 window.addEventListener('DOMContentLoaded', () => {
 	'use strict';
 
-	tabs();
+	tabs('.info-header', '.info-header-tab', '.info-tabcontent');
 	timer();
 	modal();
 	form();
