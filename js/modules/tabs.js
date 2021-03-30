@@ -22,7 +22,7 @@ function tabs(tabParent, tabSelector, tabContent) {
   header.addEventListener('click', (event) => {
     let target = event.target;
 
-    if (target && target.classList.contains('info-header-tab')) {
+    if (target && target.classList.contains(tabSelector.slice(1))) {
       for (let i = 0; i < tab.length; i++) {
         if (target == tab[i]) {
           hideContent(0);
