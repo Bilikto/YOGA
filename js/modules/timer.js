@@ -1,7 +1,5 @@
-function timer() {
+function timer(selector, deadLine) {
   // Timer
-	const deadLine = "02-27-2022";
-
 	const getTimeRemaining = (endTime) => {
 		const total = Date.parse(endTime) - Date.parse(new Date()),
 			seconds = Math.floor((total / 1000) % 60),
@@ -46,7 +44,7 @@ function timer() {
 		}
 	};
 
-	setClock('timer', deadLine);
+	setClock(selector, deadLine);
 }
 
 export default timer;
