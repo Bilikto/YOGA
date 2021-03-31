@@ -10,7 +10,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	'use strict';
 
 	tabs('.info-header', '.info-header-tab', '.info-tabcontent');
-	timer();
+	timer('timer', '02-27-2022');
 	modal();
 	form();
 	slides();
