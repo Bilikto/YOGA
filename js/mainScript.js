@@ -11,7 +11,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	tabs('.info-header', '.info-header-tab', '.info-tabcontent');
 	timer('timer', '02-27-2022');
-	modal();
+	modal('.more', '.overlay', '.popup-close', '.description-btn');
 	form();
 	slides();
 	calculator();
