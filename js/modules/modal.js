@@ -1,9 +1,9 @@
-function modal() {
+function modal(btnInfo, modalSelector, btnClose, btnDescr) {
   //Modal window
-	const moreInfoBtn = document.querySelector('.more'),
-  modal = document.querySelector('.overlay'),
-  closeBtn = document.querySelector('.popup-close'),
-  descrBtns = document.querySelectorAll('.description-btn');
+	const moreInfoBtn = document.querySelector(btnInfo),
+  modal = document.querySelector(modalSelector),
+  closeBtn = document.querySelector(btnClose),
+  descrBtns = document.querySelectorAll(btnDescr);
 
   const openModal = () => {
     modal.style.display = 'block';
