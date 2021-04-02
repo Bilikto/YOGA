@@ -1,19 +1,19 @@
-function modal(btnInfo, modalSelector, btnClose, btnDescr) {
+function modal(btnInfo, modalSelector, btnClose, btnDescr, animationCLass) {
   //Modal window
-	const moreInfoBtn = document.querySelector(btnInfo),
-  modal = document.querySelector(modalSelector),
-  closeBtn = document.querySelector(btnClose),
-  descrBtns = document.querySelectorAll(btnDescr);
+  const moreInfoBtn = document.querySelector(btnInfo),
+    modal = document.querySelector(modalSelector),
+    closeBtn = document.querySelector(btnClose),
+    descrBtns = document.querySelectorAll(btnDescr);
 
   const openModal = () => {
     modal.style.display = 'block';
-    moreInfoBtn.classList.add('more-splash');
+    moreInfoBtn.classList.add(animationCLass);
     document.body.style.overflow = 'hidden';
   };
 
   const closeModal = () => {
     modal.style.display = 'none';
-    moreInfoBtn.classList.remove('more-splash');
+    moreInfoBtn.classList.remove(animationCLass);
     document.body.style.overflow = '';
   };
 
