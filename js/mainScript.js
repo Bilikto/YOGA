@@ -12,7 +12,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	tabs('.info-header', '.info-header-tab', '.info-tabcontent');
 	timer('timer', '02-27-2022');
 	modal('.more', '.overlay', '.popup-close', '.description-btn', 'more-splash');
-	form();
+	form('.main-form', '#form', 'input');
 	slides();
 	calculator();
 
