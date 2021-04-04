@@ -1,6 +1,6 @@
 import postData from '../services/services.js';
 
-function form() {
+function form(formSelector, contactFormSelector, inputSelector) {
   // Form
 	const message = {
 		loading: 'Loading...',
@@ -8,9 +8,9 @@ function form() {
 		failure: 'Something goes wrong...'
 	};
 
-	const form = document.querySelector('.main-form'),
-		contactForm = document.querySelector('#form'),
-		input = document.getElementsByTagName('input');
+	const form = document.querySelector(formSelector),
+		contactForm = document.querySelector(contactFormSelector),
+		input = document.getElementsByTagName(inputSelector);
 
 	const statusMessage = document.createElement('div');
 	statusMessage.classList.add('status');
