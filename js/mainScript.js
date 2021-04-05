@@ -13,7 +13,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	timer('timer', '02-27-2022');
 	modal('.more', '.overlay', '.popup-close', '.description-btn', 'more-splash');
 	form('.main-form', '#form', 'input');
-	slides();
+	slides('.slider-item', '.prev', '.next', '.slider-dots', '.dot', 'dot-active');
 	calculator();
 
 });
