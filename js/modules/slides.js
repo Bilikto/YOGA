@@ -1,10 +1,10 @@
-function slides() {
+function slides(selectors, prevArrow, nextArrow, dotsParent, dotsSelector, classActive) {
   //Slides
-	const slides = document.querySelectorAll('.slider-item'),
-  prev = document.querySelector('.prev'),
-  next = document.querySelector('.next'),
-  slidesWrap = document.querySelector('.slider-dots'),
-  dots = document.querySelectorAll('.dot');
+  const slides = document.querySelectorAll(selectors),
+    prev = document.querySelector(prevArrow),
+    next = document.querySelector(nextArrow),
+    slidesWrap = document.querySelector(dotsParent),
+    dots = document.querySelectorAll(dotsSelector);
 
   let sliderIndex = 1;
 
@@ -22,11 +22,11 @@ function slides() {
     });
 
     dots.forEach((dot) => {
-      dot.classList.remove('dot-active');
+      dot.classList.remove(classActive);
     });
 
     slides[sliderIndex - 1].style.display = 'block';
-    dots[sliderIndex - 1].classList.add('dot-active');
+    dots[sliderIndex - 1].classList.add(classActive);
   };
 
   const plusSlides = (n) => {
