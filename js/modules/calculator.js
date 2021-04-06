@@ -17,21 +17,21 @@ function calculator() {
     }
   };
 
-  persons.addEventListener('change', function () {
+  persons.addEventListener('change', () => {
     personSum = +this.value;
     totalSum = (personSum * daySum) * 100;
 
     changeTotal(persons);
   });
 
-  restDays.addEventListener('change', function () {
+  restDays.addEventListener('change', () => {
     daySum = +this.value;
     totalSum = (personSum * daySum) * 100;
 
     changeTotal(restDays);
   });
 
-  place.addEventListener('change', function () {
+  place.addEventListener('change', () => {
     if (persons.value == '' || restDays.value == '') {
       total.innerHTML = 0;
     } else {
