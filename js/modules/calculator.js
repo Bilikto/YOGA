@@ -17,17 +17,15 @@ function calculator() {
     }
   };
 
-  persons.addEventListener('change', () => {
+  persons.addEventListener('change', function() {
     personSum = +this.value;
     totalSum = (personSum * daySum) * 100;
-
     changeTotal(persons);
   });
 
-  restDays.addEventListener('change', () => {
+  restDays.addEventListener('change', function() {
     daySum = +this.value;
     totalSum = (personSum * daySum) * 100;
-
     changeTotal(restDays);
   });
 
