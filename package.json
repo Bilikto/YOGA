@@ -1,0 +1,35 @@
+{
+  "name": "yoga",
+  "version": "1.0.0",
+  "description": "The timer is set up like 02-27-2022",
+  "main": "index.js",
+  "dependencies": {
+    "@babel/polyfill": "^7.12.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.13.14",
+    "@babel/core": "^7.13.15",
+    "@babel/preset-env": "^7.13.15",
+    "babel-loader": "^8.2.2",
+    "webpack": "^5.31.0",
+    "webpack-cli": "^4.6.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prod": "webpack --mode production",
+    "dev": "webpack --mode development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bilikto/YOGA.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bilikto/YOGA/issues"
+  },
+  "homepage": "https://github.com/Bilikto/YOGA#readme",
+  "browserslist": [
+    ">1%"
+  ]
+}
