@@ -4,7 +4,7 @@ function postData(data) {
 
     request.open('POST', 'server.php');
 
-    request.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
+    request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
   
     request.send(data);
 
