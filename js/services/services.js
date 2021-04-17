@@ -3,9 +3,7 @@ function postData(data) {
     const request = new XMLHttpRequest();
 
     request.open('POST', 'server.php');
-
     request.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-  
     request.send(data);
 
     request.addEventListener('load', () => {
